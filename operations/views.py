@@ -138,4 +138,80 @@ class LeapYearView(View):
  
         return render(request,"leapyear.html",{"out":result})
 
+# odd even view
+
+class OddEvenView(View):
+    def get(self,request,*args,**kwargs):
+        print("OddEVenView")
+        return render(request,"oddeven.html")
+    
+    def post(self,request,*args,**kwargs):
+        n=int(request.POST.get("num"))
+        if n%2==0:
+            result=f"{n} is a even number"
+        else:
+            result=f"{n} is a odd number"
+        
+        return render(request,"oddeven.html",{"out":result})
+    
+# prime number view
+
+class PrimeView(View):
+    def get(self,request,*args,**kwargs):
+        print("primeview")
+        return render(request,"prime.html")
+    
+    def post(self,request,*args,**kwargs):
+        n=int(request.POST.get("num"))
+        prime=[i for i in range(2,n) if n%i==0]
+        result="not a prime number" if any(prime)==True else "is a prime number"
+
+        return render(request,"prime.html",{"out":result}) 
+        
+
+
+
+
+# index view
+
+class IndexView(View):
+    def get(self,request,*args,**kwargs):
+        print("index view")
+
+        return render(request,"index.html")
+    
+# bmi view
+
+class BmiView(View):
+    def get(self,request,*args,**kwargs):
+        print("bmiview")
+        return render(request,"bmi.html")
+
+    def post(self,request,*args,**kwargs):
+        weight_in_kg=int(request.POST.get("weight_in_kg"))
+        height_in_cm=int(request.POST.get("height_in_cm"))
+        height_in_meter=height_in_cm/100
+        bmi=weight_in_kg/(height_in_meter)**2
+        print(bmi)
+
+        return render(request,"bmi.html",{"out":bmi})
+    
+
+# EMI view
+
+class EmiView(View):
+    def get(self,request,*args,**kwargs):
+        print("emiview")
+        return render(request,"emi.html")
+    
+    def post(self,request,*args,**kwargs):
+        R=int(request.POST.get("interest_rate"))
+        r=R/12
+        P=int(request.POST.get("principal_amount"))
+        year=int(request.POST.get("number_of_year"))
+        n=year*12
+        emi=(P*r*(1+r)**n)/(((1+r)**n)-1)
+        
+        return render(request,"emi.html",{"out":emi})
+
 

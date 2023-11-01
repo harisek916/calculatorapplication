@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMI</title>
+</head>
+<body>
+    <h1>EMI CALCULATOR</h1>
+    <div class="container">
+        <form action="" method="post">
+            {%csrf_token%}
+            <div>
+                <label for="">loan amount</label>
+                <input type="text" placeholder="enter loan amount" name="principal_amount">
+            </div>
+            <div>
+                <label for="">interest rate</label>
+                <input type="text" placeholder="enter interest rate" name="interest_rate">
+            </div>
+            <div>
+                <label for="">tenure</label>
+                <input type="text" placeholder="enter tenure in year" name="number_of_year">
+            </div>
+            <button type="submit">Calculate</button>
+        </form>
+        {{out}}
+    </div>
+</body>
+</html>
