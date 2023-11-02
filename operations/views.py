@@ -207,11 +207,22 @@ class EmiView(View):
     def post(self,request,*args,**kwargs):
         R=int(request.POST.get("interest_rate"))
         r=R/12
+        r=r/100
         P=int(request.POST.get("principal_amount"))
         year=int(request.POST.get("number_of_year"))
         n=year*12
-        emi=(P*r*(1+r)**n)/(((1+r)**n)-1)
+        emi=((P*r)*(1+r)**n)/(((1+r)**n)-1)
+        emi=round(emi,0)
+        total_payale=emi*n
+        total_interest=total_payale-P
+        print(total_payale)
         
-        return render(request,"emi.html",{"out":emi})
+
+        return render(request,"emi.html",{
+                                          "emi":emi,
+                                          "total_payable":total_payale,
+                                          "total_interest":total_interest
+                                          }
+                    ) 
 
 
