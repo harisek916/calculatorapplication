@@ -10,47 +10,88 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+        <style>
+            body{
+                height: 100vh;
+                background-color: #4158D0;
+                background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+
+            }
+                     
+         
+            .btn-grad {
+            background-image: linear-gradient(to right, #AA076B 0%, #61045F  51%, #AA076B  100%);
+            margin: 10px;
+            padding: 7px 35px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;            
+            box-shadow: 0 0 20px #eee;
+            border-radius: 15px;
+            display: block;
+          }
+
+          .btn-grad:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+          }
+            
+        </style>
 </head>
 
 <body>
 
-    <div class="container ">
-        <h1>EMI CALCULATOR</h1>
-        <form action="" method="post">
-            {%csrf_token%}
-            <div class="mb-3">
-                <label for="">loan amount</label>
-                <input type="text" placeholder="enter loan amount" name="principal_amount">
-            </div>
-            <div class="mb-3">
-                <label for="">interest rate</label>
-                <input type="text" placeholder="enter interest rate" name="interest_rate">
-            </div>
-            <div class="mb-3">
-                <label for="">tenure</label>
-                <input type="text" placeholder="enter tenure in year" name="number_of_year">
-            </div>
-            <button type="submit" class="btn-outline-info">Calculate</button>
-        </form>
+    <div class="container mt-5 p-5 w-50">  
 
-
-    </div>
-
-    {%if emi%}
-    <div class="container">
-        <div>
-            <div>
-                <h4>EMI: {{emi}}</h4>
+        <div class="rounded-4 p-5 bg-white shadow">
+            <form action="" method="post" class="w-100">
+                {%csrf_token%}
+                <h3 class="text-center fw-bold">EMI CALCULATOR</h3>
+                <div class="mb-3">
+                    <label for="">loan amount:</label>
+                    <input type="text" placeholder="enter loan amount" name="principal_amount" class="form-control ">
+                </div>
+                <div class="mb-3">
+                    <label for="">interest rate:</label>
+                    <input type="text" placeholder="enter interest rate" name="interest_rate" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="">tenure:</label>
+                    <input type="text" placeholder="enter tenure in year" name="number_of_year" class="form-control">
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn-grad ">Calculate</button>
+                </div>
+            </form>
+            {%if emi%}
+            <div class="">
+                <div class="d-flex justify-content-between">
+                    <div class="p-1 m-1 border-end border-start" >
+                        <h4>EMI: </h4>
+                        <h4 class="text-center">{{emi}}</h4>
+                    </div>
+        
+                    <div class="p-1 m-1 border-end border-start">
+                        <h4>Total amount payable: </h4>
+                        <h4 class="text-center">{{total_payable}}</h4>
+                    </div>
+        
+                    <div class="p-1 m-1 border-end border-start">
+                        <h4>total interest: </h4>
+                        <h4 class="text-center">{{total_interest}}</h4>
+                    </div>
+                </div>
             </div>
-            <div>
-                <h4>Total amount payable: {{total_payable}}</h4>
-            </div>
-            <div>
-                <h4>total interest: {{total_interest}}</h4>
-            </div>
+            {%endif%}
+            
         </div>
+
     </div>
-    {%endif%}
+
+
 </body>
 
 </html>
